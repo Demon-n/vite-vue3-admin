@@ -36,7 +36,7 @@
                 </a>
             </a-form-item>
         </a-form>
-</div>
+    </div>
 </template>
 <script lang="ts">
 import { defineComponent, reactive, computed } from 'vue';
@@ -104,11 +104,9 @@ export default defineComponent({
                     // reqGetUserInfo();
                 }
                 else
-                message.warn("很遗憾，登陆失败！！！！")
+                    message.warn(response.message)
             })
         }
-
-
         return {
             formState,
             onFinish,

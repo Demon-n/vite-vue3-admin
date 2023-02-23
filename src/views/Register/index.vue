@@ -29,6 +29,7 @@ import { defineComponent, reactive } from 'vue';
 import { reqRegister } from '../../api';
 import { useRouter } from 'vue-router';
 import { message } from 'ant-design-vue';
+
 const router = useRouter()
 
 
