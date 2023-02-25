@@ -16,6 +16,12 @@ const routes = [
     name: 'Home',
     path: '/home',
     component: () => import('../layouts/index.vue')
+  },
+  //文章、新闻列表
+  {
+    name: 'SelectSort',
+    path: '/selectSort',
+    component: () => import('../views/SelectSort/index.vue'),
   }
 ];
 

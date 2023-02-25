@@ -20,7 +20,7 @@
             </a-layout-header>
             <!-- 内容 -->
             <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }">
-                Content
+                <Container />
             </a-layout-content>
         </a-layout>
     </a-layout>
@@ -29,6 +29,7 @@
 
 
 import Menu from './Menu/index.vue'
+import Container from '../views/Container/index.vue'
 import {
     FileTextOutlined,
     ProfileOutlined,
@@ -45,7 +46,8 @@ export default defineComponent({
         SettingFilled,
         MenuUnfoldOutlined,
         MenuFoldOutlined,
-        Menu
+        Menu,
+        Container
     },
     setup() {
         return {

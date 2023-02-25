@@ -48,6 +48,7 @@ import { reqLogin } from '../../api';
 import { setToken } from '../../utils/auth';
 import { reqGetUserInfo } from "../../api/";
 import { message } from 'ant-design-vue';
+import { Spin } from "ant-design-vue";
 interface FormState {
     username: string;
     password: string;
