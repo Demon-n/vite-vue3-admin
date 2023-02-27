@@ -14,9 +14,28 @@
                     style="display: inline-block; font-size: 20px; font-weight: 600; width: 80%; text-align: center; flex: 1;">
                     cms管理系统
                 </span>
-                <span class="user">
-                    <a-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                </span>
+                <a-dropdown>
+                    <a class="ant-dropdown-link" @click.prevent>
+                        <span class="user">
+                            <a-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                        </span>
+                        <DownOutlined />
+                    </a>
+                    <template #overlay>
+                        <a-menu>
+                            <a-menu-item>
+                                <router-link to="/selectUserInfo">个人中心</router-link>
+                            </a-menu-item>
+                            <a-menu-item>
+                                <router-link to="/undatePassWord">修改密码</router-link>
+                            </a-menu-item>
+                            <a-menu-item>
+                                <router-link to="/login">退出登录</router-link>
+                            </a-menu-item>
+                        </a-menu>
+                    </template>
+                </a-dropdown>
+
             </a-layout-header>
             <!-- 内容 -->
             <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }">
@@ -26,8 +45,6 @@
     </a-layout>
 </template>
 <script lang="ts">
-
-
 import Menu from './Menu/index.vue'
 import Container from '../views/Container/index.vue'
 import {
@@ -39,6 +56,7 @@ import {
 
 } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
+import echarts from "echarts";
 export default defineComponent({
     components: {
         FileTextOutlined,

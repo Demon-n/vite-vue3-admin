@@ -1,7 +1,9 @@
 <template>
   <div>
     <br />
-    <h1 style="color:aliceblue; text-align: center;">Vite-Vue3-Admin</h1>
+    <h1 style="color:aliceblue; text-align: center;">
+      <a class="header-log" href="/home">Vite-Vue3-Admin</a>
+    </h1>
     <a-menu click v-model:openKeys="state.openKeys" v-model:selectedKeys="state.selectedKeys" style="width: 256px"
       mode="inline" :theme="state.theme">
       <a-sub-menu v-for="sItem in menuList" :index="sItem.key" :key="sItem.key">
@@ -21,17 +23,14 @@
   </div>
 </template>
 <script  lang="ts" setup>
-import { getAllMenuCategory, reqSelectSort } from '../../api/index'
-import { defineComponent, reactive, toRefs, onUnmounted } from 'vue';
+import { getAllMenuCategory } from '../../api/index'
+import { reactive, } from 'vue';
 import type { MenuTheme } from 'ant-design-vue';
 import {
-  MailOutlined,
-  CalendarOutlined,
   AppstoreOutlined,
-  SettingOutlined,
 } from '@ant-design/icons-vue';
 
-const menuList = [
+const menuList = reactive([
   {
     title: "系统管理",
     path: "/systemManage",
@@ -46,25 +45,10 @@ const menuList = [
         title: "系统信息管理",
         path: "/systemInfoManage",
         key: "systemInfoManage",
-      },
-      {
-        title: "个人中心",
-        path: "/selectUserInfo",
-        key: "selectUserInfo",
-      },
-      {
-        title: "修改密码",
-        path: "/undatePassWord",
-        key: "undatePassWord",
-      },
-      {
-        title: "退出登录",
-        path: "/exit",
-        key: "exit",
       }
     ],
   },
-];
+]);
 //加载菜单
 getAllMenuCategory().then((res) => {
   const newData = res.data.map((item: { title: any; id: string; }, index: string) => {
@@ -95,6 +79,12 @@ function onUpdated(arg0: () => void) {
 <style>
 .ant-layout-sider .ant-layout-sider-children .ant-menu {
   width: 100% !important;
+}
+
+
+
+.header-log {
+  font-weight: 800;
 }
 </style>
   

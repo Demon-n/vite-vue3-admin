@@ -1,9 +1,14 @@
 const routes = [
+  //默认入口
+  {
+    path: '/',
+    redirect: '/login'
+  },
   //登录
   {
     name: 'Login',
-    path: '/',
-    component: () => import('../views/Login/index.vue')
+    path: '/login',
+    component: () => import('../views/Login/index.vue'),
   },
   //注册
   {
@@ -15,14 +20,29 @@ const routes = [
   {
     name: 'Home',
     path: '/home',
-    component: () => import('../layouts/index.vue')
+    component: () => import('../layouts/index.vue'),
+    children: [
+      //文章、新闻列表
+      {
+        name: 'SelectSort',
+        path: '/selectSort',
+        component: () => import('../views/Container/SelectSort/index.vue'),
+      },
+      //个人中心
+      {
+        name: 'SelectUserInfo',
+        path: '/selectUserInfo',
+        component: () => import('../views/Container/SelectUserInfo/index.vue'),
+      },
+      //修改密码
+      {
+        name: 'undatePassWord',
+        path: '/undatePassWord',
+        component: () => import('../views/Container/UpdatePass/index.vue'),
+      }
+    ]
   },
-  //文章、新闻列表
-  {
-    name: 'SelectSort',
-    path: '/selectSort',
-    component: () => import('../views/SelectSort/index.vue'),
-  }
+
 ];
 
 export default routes
