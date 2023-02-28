@@ -39,6 +39,18 @@ const routes = [
         name: 'undatePassWord',
         path: '/undatePassWord',
         component: () => import('../views/Container/UpdatePass/index.vue'),
+      },
+      //分类管理
+      {
+        name: 'CategoryManage',
+        path: '/categoryManage',
+        component: () => import('../views/Container/CategoryManage/index.vue'),
+      },
+      //系统管理
+      {
+        name: 'SystemInfoManage',
+        path: '/systemInfoManage',
+        component: () => import('../views/Container/SystemInfoManage/index.vue'),
       }
     ]
   },

@@ -33,7 +33,7 @@ import {
 const menuList = reactive([
   {
     title: "系统管理",
-    path: "/systemManage",
+    path: "",
     key: "systemManage",
     children: [
       {

@@ -1,6 +1,6 @@
 <template>
     <a-carousel autoplay v-if="router.currentRoute.value.path == '/home'">
-        <div class="pmd">
+        <div>
             <img src="../../assets/veer-105516317.webp" />
         </div>
         <div>
@@ -13,12 +13,16 @@
     <SelectSort v-if="router.currentRoute.value.path == '/SelectSort'" />
     <SelectUserInfo v-if="router.currentRoute.value.path === '/selectUserInfo'" />
     <undatePassWord v-if="router.currentRoute.value.path === '/undatePassWord'" />
+    <CategoryManage v-if="router.currentRoute.value.path === '/categoryManage'" />
+    <SystemInfoManage v-if="router.currentRoute.value.path === '/systemInfoManage'" />
 </template>
 <script lang="ts" setup>
 import { useRouter } from 'vue-router'
 import SelectSort from './SelectSort/index.vue'
 import SelectUserInfo from './SelectUserInfo/index.vue'
 import undatePassWord from './UpdatePass/index.vue'
+import CategoryManage from './CategoryManage/index.vue'
+import SystemInfoManage from './SystemInfoManage/index.vue'
 
 const router = useRouter()
 </script>
@@ -34,9 +38,5 @@ const router = useRouter()
 
 .ant-carousel :deep(.slick-slide h3) {
     color: #fff;
-}
-
-.pmd img {
-    height: 100%;
 }
 </style>

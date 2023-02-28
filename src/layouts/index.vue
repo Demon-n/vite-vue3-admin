@@ -16,6 +16,9 @@
                 </span>
                 <a-dropdown>
                     <a class="ant-dropdown-link" @click.prevent>
+                        <span class="username">
+                            {{ user.userInfo.username }}
+                        </span>
                         <span class="user">
                             <a-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
                         </span>
@@ -44,38 +47,18 @@
         </a-layout>
     </a-layout>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import Menu from './Menu/index.vue'
 import Container from '../views/Container/index.vue'
-import {
-    FileTextOutlined,
-    ProfileOutlined,
-    SettingFilled,
-    MenuUnfoldOutlined,
-    MenuFoldOutlined,
-
-} from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
-import echarts from "echarts";
-export default defineComponent({
-    components: {
-        FileTextOutlined,
-        ProfileOutlined,
-        SettingFilled,
-        MenuUnfoldOutlined,
-        MenuFoldOutlined,
-        Menu,
-        Container
-    },
-    setup() {
-        return {
-            selectedKeys: ref<string[]>(['1']),
-            collapsed: ref<boolean>(false),
-        };
-    },
-});
+import { reqGetUserInfo } from '../api/index'
+import { reactive } from 'vue';
+let user: any = reactive({ userInfo: {} })
+//获取用户名
+reqGetUserInfo().then((res) => {
+    user.userInfo = res
+})
 </script>
-<style>
+<style scoped lang="less">
 #components-layout-demo-custom-trigger .trigger {
     font-size: 18px;
     line-height: 64px;
@@ -104,9 +87,21 @@ export default defineComponent({
 
 .layout .user {
     display: inline-block;
-    height: 100%;
     width: 100px;
     text-align: center;
-    float: right;
+}
+
+.ant-layout .ant-layout-header .ant-dropdown-link {
+    display: inline-block;
+
+    .username {
+        color: black;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 500;
+        display: inline-block;
+        float: left;
+        line-height: 70px;
+    }
 }
 </style>
