@@ -6,6 +6,7 @@ import nprogress from 'nprogress'
 //引入nprogress进度样式
 import 'nprogress/nprogress.css'
 import { getToken } from '../utils/auth'
+import { AxiosRequestConfig } from "axios"
 const requests = axios.create({
   //基础路径，发送请求的时候，路径当中会出现api
   baseURL: "http://node.htmldiv.cn/",
@@ -14,7 +15,7 @@ const requests = axios.create({
 });
 // 请求头 token配置
 requests.interceptors.request.use(
-  (config) => {
+  (config: any) => {
     const token = getToken();
     if (token) {
       config.headers = {
@@ -46,6 +47,6 @@ requests.interceptors.response.use(
   },
   (error) => {
     //响应失败的回调函数
-    return Promise.reject(new Error('faile'), error);
+    return Promise.reject(error);
   })
 export default requests

@@ -60,7 +60,7 @@ const onFinish = (values: any) => {
       })
     }
     else {
-      message.warn(response.message)
+      message.error('很遗憾，注册失败！！！')
     }
   })
 }

@@ -1,8 +1,8 @@
 <template>
   <a-button class="editable-add-btn" style="margin-bottom: 8px" @click="handleAdd">Add</a-button>
-  <a-table size="small" bordered :data-source="dataSource" :columns="columns">
+  <a-table  rowKey="id" bordered  :data-source="dataSource" :columns="columns">
     <template #bodyCell="{ column, text, record }">
-      <template v-if="column.lable === '序号'">
+      <template v-if="column.dataIndex === 'name'">
         <div class="editable-cell">
           <div v-if="editableData[record.key]" class="editable-cell-input-wrapper">
             <a-input v-model:value="editableData[record.key].name" @pressEnter="save(record.key)" />
@@ -34,40 +34,24 @@ interface DataItem {
   age: number;
   address: string;
 }
+let props: any = defineProps({
+  columns: {
+    type: Array,
+    default: ''
+  },
+  tableData: {
+    type: Array,
+    default: ''
+  }
+})
+// 表头数据
 
-const columns = [
-  {
-    title: 'name',
-    dataIndex: 'name',
-    width: '30%',
-  },
-  {
-    title: 'age',
-    dataIndex: 'age',
-  },
-  {
-    title: 'address',
-    dataIndex: 'address',
-  },
-  {
-    title: 'operation',
-    dataIndex: 'operation',
-  },
-];
-const dataSource: Ref<DataItem[]> = ref([
-  {
-    key: '0',
-    name: 'Edward King 0',
-    age: 32,
-    address: 'London, Park Lane no. 0',
-  },
-  {
-    key: '1',
-    name: 'Edward King 1',
-    age: 32,
-    address: 'London, Park Lane no. 1',
-  },
-]);
+console.log('table表收到的标题头', props.columns)
+
+// 表数据
+console.log('table表收到的新闻文章数组', props.tableData.articleList)
+
+const dataSource: Ref<DataItem[]> = ref(props.tableData.articleList);
 const count = computed(() => dataSource.value.length + 1);
 const editableData: UnwrapRef<Record<string, DataItem>> = reactive({});
 
@@ -91,6 +75,7 @@ const handleAdd = () => {
   };
   dataSource.value.push(newData);
 };
+
 
 
 </script>

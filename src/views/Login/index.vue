@@ -105,7 +105,7 @@ export default defineComponent({
                     // reqGetUserInfo();
                 }
                 else
-                    message.warn(response.message)
+                    message.warn('登录失败')
             })
         }
         return {

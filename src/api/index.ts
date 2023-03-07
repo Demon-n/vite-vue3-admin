@@ -37,7 +37,7 @@ export const reqGetUserInfo = () =>
  * 查看文章分类接口
  *
  */
-export const reqSelectSort = (id:number) =>
+export const reqSelectSort = (id:any) =>
   requests({
     url: "/article/getAllCategory",
     method: "get",
