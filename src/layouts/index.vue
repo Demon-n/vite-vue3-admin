@@ -22,7 +22,6 @@
                         <span class="user">
                             <a-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
                         </span>
-                        <DownOutlined />
                     </a>
                     <template #overlay>
                         <a-menu>
@@ -42,14 +41,13 @@
             </a-layout-header>
             <!-- 内容 -->
             <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }">
-                <Container />
+                <router-view :key="$route.fullPath"></router-view>
             </a-layout-content>
         </a-layout>
     </a-layout>
 </template>
 <script lang="ts" setup>
 import Menu from './Menu/index.vue'
-import Container from '../views/Container/index.vue'
 import { reqGetUserInfo } from '../api/index'
 import { reactive } from 'vue';
 let user: any = reactive({ userInfo: {} })

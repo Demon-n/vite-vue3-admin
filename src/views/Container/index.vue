@@ -1,30 +1,26 @@
-<template>
-    <a-carousel autoplay v-if="router.currentRoute.value.path == '/home'">
-        <div>
-            <img src="../../assets/veer-105516317.webp" />
-        </div>
-        <div>
-            <img src="../../assets/veer-157500339.webp" />
-        </div>
-        <div>
-            <img src="../../assets/veer-165615509.webp" />
-        </div>
+<template >
+    <!-- <a-carousel v-if="router.currentRoute.value.path === '/home'">
+        home
     </a-carousel>
-    <SelectSort v-if="router.currentRoute.value.path == '/SelectSort'" />
+    <SelectSort v-if="router.currentRoute.value.path === '/SelectSort/' + router.currentRoute.value.params.id" />
     <SelectUserInfo v-if="router.currentRoute.value.path === '/selectUserInfo'" />
     <undatePassWord v-if="router.currentRoute.value.path === '/undatePassWord'" />
     <CategoryManage v-if="router.currentRoute.value.path === '/categoryManage'" />
-    <SystemInfoManage v-if="router.currentRoute.value.path === '/systemInfoManage'" />
+    <SystemInfoManage v-if="router.currentRoute.value.path === '/systemInfoManage'" /> -->
+    <router-view></router-view>
 </template>
 <script lang="ts" setup>
-import { useRouter } from 'vue-router'
-import SelectSort from './SelectSort/index.vue'
-import SelectUserInfo from './SelectUserInfo/index.vue'
-import undatePassWord from './UpdatePass/index.vue'
-import CategoryManage from './CategoryManage/index.vue'
-import SystemInfoManage from './SystemInfoManage/index.vue'
+// import { useRouter } from 'vue-router'
+// import SelectSort from './SelectSort/index.vue'
+// import SelectUserInfo from './SelectUserInfo/index.vue'
+// import undatePassWord from './UpdatePass/index.vue'
+// import CategoryManage from './CategoryManage/index.vue'
+// import SystemInfoManage from './SystemInfoManage/index.vue'
 
-const router = useRouter()
+// const router = useRouter()
+// console.log('router', router)
+
+
 </script>
 <style scoped>
 /* For demo */

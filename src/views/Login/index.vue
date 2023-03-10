@@ -41,14 +41,10 @@
 <script lang="ts">
 import { defineComponent, reactive, computed } from 'vue';
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
-import routes from '../../router/routes';
-import { commonProps } from 'ant-design-vue/lib/date-picker/generatePicker/props';
 import { useRouter } from 'vue-router'
 import { reqLogin } from '../../api';
 import { setToken } from '../../utils/auth';
-import { reqGetUserInfo } from "../../api/";
 import { message } from 'ant-design-vue';
-import { Spin } from "ant-design-vue";
 interface FormState {
     username: string;
     password: string;

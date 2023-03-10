@@ -1,125 +1,48 @@
 <template>
-  <a-button class="editable-add-btn" style="margin-bottom: 8px" @click="handleAdd">Add</a-button>
-  <a-table  rowKey="id" bordered  :data-source="dataSource" :columns="columns">
-    <template #bodyCell="{ column, text, record }">
-      <template v-if="column.dataIndex === 'name'">
-        <div class="editable-cell">
-          <div v-if="editableData[record.key]" class="editable-cell-input-wrapper">
-            <a-input v-model:value="editableData[record.key].name" @pressEnter="save(record.key)" />
-            <check-outlined class="editable-cell-icon-check" @click="save(record.key)" />
-          </div>
-          <div v-else class="editable-cell-text-wrapper">
-            {{ text || ' ' }}
-            <edit-outlined class="editable-cell-icon" @click="edit(record.key)" />
-          </div>
-        </div>
-      </template>
-      <template v-else-if="column.dataIndex === 'operation'">
-        <a-popconfirm v-if="dataSource.length" title="Sure to delete?" @confirm="onDelete(record.key)">
-          <a>Delete</a>
-        </a-popconfirm>
+  <a-table :dataSource="tableData" :columns="columns">
+    <template #bodyCell="{ column, record }">
+      <template v-if="column.dataIndex === 'operation'">
+        <a-row>
+          <a-col :span="6">
+            <a-popconfirm v-if="tableData.length" title="Sure to edit?" @confirm="onEdit(record.key)">
+              <a>Edit</a>
+            </a-popconfirm>
+          </a-col>
+          <a-col :span="6">
+            <a-popconfirm v-if="tableData.length" title="Sure to delete?" @confirm="onDelete(record.key)">
+              <a>Delete</a>
+            </a-popconfirm>
+          </a-col>
+        </a-row>
       </template>
     </template>
   </a-table>
 </template>
 <script lang="ts" setup>
-import { computed, reactive, ref } from 'vue';
-import type { Ref, UnwrapRef } from 'vue';
-import { CheckOutlined, EditOutlined } from '@ant-design/icons-vue';
-import { cloneDeep } from 'lodash-es';
 
-interface DataItem {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-}
 let props: any = defineProps({
   columns: {
     type: Array,
-    default: ''
+    default: function () {
+      return []
+    }
   },
   tableData: {
     type: Array,
-    default: ''
+    default: function () {
+      return []
+    }
   }
 })
+const onEdit = (key: string) => {
+  props.tableData = props.tableData.filter((item: { key: string; }) => item.key !== key);
+};
+const onDelete = (key: string) => {
+  props.tableData = props.tableData.filter((item: { key: string; }) => item.key !== key);
+};
 // 表头数据
-
 console.log('table表收到的标题头', props.columns)
 
 // 表数据
-console.log('table表收到的新闻文章数组', props.tableData.articleList)
-
-const dataSource: Ref<DataItem[]> = ref(props.tableData.articleList);
-const count = computed(() => dataSource.value.length + 1);
-const editableData: UnwrapRef<Record<string, DataItem>> = reactive({});
-
-const edit = (key: string) => {
-  editableData[key] = cloneDeep(dataSource.value.filter(item => key === item.key)[0]);
-};
-const save = (key: string) => {
-  Object.assign(dataSource.value.filter(item => key === item.key)[0], editableData[key]);
-  delete editableData[key];
-};
-
-const onDelete = (key: string) => {
-  dataSource.value = dataSource.value.filter(item => item.key !== key);
-};
-const handleAdd = () => {
-  const newData = {
-    key: `${count.value}`,
-    name: `Edward King ${count.value}`,
-    age: 32,
-    address: `London, Park Lane no. ${count.value}`,
-  };
-  dataSource.value.push(newData);
-};
-
-
-
+console.log('table表收到的新闻文章数组', props.tableData)
 </script>
-<style lang="less">
-.editable-cell {
-  position: relative;
-
-  .editable-cell-input-wrapper,
-  .editable-cell-text-wrapper {
-    padding-right: 24px;
-  }
-
-  .editable-cell-text-wrapper {
-    padding: 5px 24px 5px 5px;
-  }
-
-  .editable-cell-icon,
-  .editable-cell-icon-check {
-    position: absolute;
-    right: 0;
-    width: 20px;
-    cursor: pointer;
-  }
-
-  .editable-cell-icon {
-    margin-top: 4px;
-    display: none;
-  }
-
-  .editable-cell-icon-check {
-    line-height: 28px;
-  }
-
-  .editable-cell-icon:hover,
-  .editable-cell-icon-check:hover {
-    color: #108ee9;
-  }
-
-  .editable-add-btn {
-    margin-bottom: 8px;
-  }
-}
-
-.editable-cell:hover .editable-cell-icon {
-  display: inline-block;
-}
-</style>

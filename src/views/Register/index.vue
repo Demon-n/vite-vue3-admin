@@ -25,7 +25,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { defineComponent, reactive } from 'vue';
+import {  reactive } from 'vue';
 import { reqRegister } from '../../api';
 import { useRouter } from 'vue-router';
 import { message } from 'ant-design-vue';

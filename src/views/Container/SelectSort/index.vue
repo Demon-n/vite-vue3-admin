@@ -1,21 +1,17 @@
 <template>
-  <Itable :columns="tableColumns" :tableData="articleLists" :tableName="tableName" />
+  <Itable :columns="tableColumns" :tableData="articleLists.articleList" />
 </template>
 <script lang="ts" setup>
 import { reactive } from '@vue/reactivity';
 import { reqSelectSort } from '../../../api';
 import Itable from '../../../components/Itable.vue'
 import { useRouter } from 'vue-router'
-const tableName = "selectTable"
 let articleLists: any = reactive({ articleList: [] })
-
-
-const tableColumns = reactive([
+let tableColumns = reactive([
   {
     title: '序号',
     dataIndex: 'id',
     key: 'id',
-    width: '30%',
   },
   {
     title: '类别名',
@@ -26,10 +22,6 @@ const tableColumns = reactive([
     title: '描述',
     dataIndex: 'alias',
     key: 'alias'
-  },
-  {
-    title: '图片',
-    dataIndex: 'img'
   },
   {
     title: '存在与否',
@@ -43,9 +35,14 @@ const tableColumns = reactive([
   },
 ])
 const router = useRouter()
-// console.log('rojaldjalsjdasjd', router.currentRoute.value.query.id)
-reqSelectSort({ id: router.currentRoute.value.query.id }).then((res) => {
+// 获取文章、新闻
+reqSelectSort(router.currentRoute.value.params).then((res) => {
+  // console.log(res.data.length)
   articleLists.articleList = res.data;
+  //遍历数组对象追加删除操作
+  // for (let i = 0; i < articleLists.articleList.length; i++) {
+  //   articleLists.articleList[i].operation = 'delete' 
+  // }
   console.log('传出去的文章，新闻数组', articleLists.articleList);
   console.log('传出去的标题头', tableColumns)
 });

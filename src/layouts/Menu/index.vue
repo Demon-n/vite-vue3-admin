@@ -2,7 +2,7 @@
   <div>
     <br />
     <h1 style="color:aliceblue; text-align: center;">
-      <a class="header-log" href="/home">Vite-Vue3-Admin</a>
+      <a class="header-log" href="/">Vite-Vue3-Admin</a>
     </h1>
     <a-menu click v-model:openKeys="state.openKeys" v-model:selectedKeys="state.selectedKeys" style="width: 256px"
       mode="inline" :theme="state.theme">
@@ -32,6 +32,12 @@ import {
 
 const menuList = reactive([
   {
+    title: "分类",
+    path: "",
+    key: "sort",
+    children: []
+  },
+  {
     title: "系统管理",
     path: "",
     key: "systemManage",
@@ -54,11 +60,11 @@ getAllMenuCategory().then((res) => {
   const newData = res.data.map((item: { title: any; id: string; }, index: string) => {
     return {
       title: item.title,
-      path: '/SelectSort?id=' + item.id,
+      path: '/SelectSort/' + item.id,
       key: 'SelectSort' + index
     }
   })
-  menuList.unshift(...newData);
+  menuList[0].children.unshift(...newData);
 }
 )
 
@@ -80,8 +86,6 @@ function onUpdated(arg0: () => void) {
 .ant-layout-sider .ant-layout-sider-children .ant-menu {
   width: 100% !important;
 }
-
-
 
 .header-log {
   font-weight: 800;

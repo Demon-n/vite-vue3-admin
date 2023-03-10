@@ -1,9 +1,4 @@
 const routes = [
-  //默认入口
-  {
-    path: '/',
-    redirect: '/login'
-  },
   //登录
   {
     name: 'Login',
@@ -19,13 +14,13 @@ const routes = [
   //主页
   {
     name: 'Home',
-    path: '/home',
+    path: '/',
     component: () => import('../layouts/index.vue'),
     children: [
       //文章、新闻列表
       {
         name: 'SelectSort',
-        path: '/selectSort',
+        path: '/selectSort/:id',
         component: () => import('../views/Container/SelectSort/index.vue'),
       },
       //个人中心
@@ -54,7 +49,6 @@ const routes = [
       }
     ]
   },
-
 ];
 
 export default routes
