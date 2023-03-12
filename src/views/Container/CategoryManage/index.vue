@@ -1,51 +1,79 @@
 <template>
-    CategoryManage
-    <Itable  :columns="tableColumns" :tableData="articleLists.articleList"/>
+  <Itable :columns="columns" :tableData="tableData.articleList" :mydelete="mydelete" :myedit="myedit" />
 </template>
 <script lang="ts" setup>
 import Itable from '../../../components/Itable.vue'
-import {reqSelectSort} from '../../../api/index'
+import { getAllMenuCategory } from '../../../api/index'
+import { reqDeleteCategorySort } from '../../../api/index'
 import { useRouter } from 'vue-router'
 import { reactive } from '@vue/reactivity';
 
-let articleLists: any = reactive({ articleList: [] })
-let tableColumns = reactive([
+let tableData: any = reactive({ articleList: [] })
+let columns = reactive([
   {
     title: '序号',
     dataIndex: 'id',
     key: 'id',
+    align: 'center'
   },
   {
     title: '类别名',
-    dataIndex: 'cate_id',
-    key: 'cate_id',
+    dataIndex: 'title',
+    key: 'title',
+    align: 'center'
   },
   {
     title: '描述',
-    dataIndex: 'alias',
-    key: 'alias'
+    dataIndex: 'description',
+    key: 'description',
+    width: '20%',
+    align: 'center'
   },
   {
-    title: '存在与否',
-    dataIndex: 'is_delete',
-    key: 'is_delete'
+    title: '图片',
+    dataIndex: 'img',
+    key: 'img',
+    width: '5%',
+    align: 'center'
   },
   {
     title: '操作',
     dataIndex: 'operation',
-    key: 'operation'
+    key: 'operation',
+    width: '15%',
+    align: 'center'
   },
 ])
 const router = useRouter()
-// 获取文章、新闻
-reqSelectSort(router.currentRoute.value.params).then((res) => {
-  // console.log(res.data.length)
-  articleLists.articleList = res.data;
-  //遍历数组对象追加删除操作
-  // for (let i = 0; i < articleLists.articleList.length; i++) {
-  //   articleLists.articleList[i].operation = 'delete' 
-  // }
-  console.log('传出去的文章，新闻数组', articleLists.articleList);
-  console.log('传出去的标题头', tableColumns)
+// 获取分类
+getAllMenuCategory().then((res) => {
+  tableData.articleList = res.data;
+  //遍历数组对象追加编辑、删除操作
+  for (let i = 0; i < tableData.articleList.length; i++) {
+    tableData.articleList[i].btn = [
+      {
+        title: "edit", callback: () => {
+          console.log("edit")
+        }
+      },
+      {
+        title: "delete", callback: (data: any) => {
+          console.log("delete", data)
+          reqDeleteCategorySort(data).then((res) => {
+            console.log(res)
+          })
+        }
+      }
+    ]
+  }
+  console.log('传出去的文章，新闻数组', tableData.articleList);
+  console.log('传出去的标题头', columns)
 });
+const myedit = () => {
+  console.log('编辑')
+}
+const mydelete = (id: string) => {
+  console.log('删除的id：', id)
+
+}
 </script>

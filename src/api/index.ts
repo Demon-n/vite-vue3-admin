@@ -37,7 +37,7 @@ export const reqGetUserInfo = () =>
  * 查看文章分类接口
  *
  */
-export const reqSelectSort = (id:any) =>
+export const reqSelectSort = (id: any) =>
   requests({
     url: "/article/getAllCategory",
     method: "get",
@@ -63,12 +63,20 @@ export const reqUpdateSort = (data: any) =>
  *
  */
 export const reqDeleteSort = (data: any) =>
-  requests({ url: "/article/deleteCategory", method: "get", data });
+  requests({ url: "/artic le/deleteCategory", method: "put", data });
 
 /**
  *
- * 添加文章分类接口
+ * 查看分类接口
  *
  */
 export const getAllMenuCategory = () =>
   requests({ url: "/article/getAllRouterCategory", method: "get" });
+
+/**
+*
+* 删除分类接口
+*
+*/
+export const reqDeleteCategorySort = (data: any) =>
+  requests({ url: "/category/deleteCategory", method: "get", data });
