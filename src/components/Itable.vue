@@ -1,5 +1,10 @@
 <template>
-  <a-table columnWidth :dataSource="tableData" :columns="columns">
+  <a-rol :buttonData="buttonData">
+    <template v-for="item in buttonData">
+      <a-button class="editable-add-btn" style="margin: 8px">{{ item.title }}</a-button>
+    </template>
+  </a-rol>
+  <a-table :dataSource="tableData" :columns="columns">
     <template #bodyCell="{ column, record }">
       <template v-if="column.dataIndex === 'operation'">
         <a-row>
@@ -14,6 +19,7 @@
   </a-table>
 </template> 
 <script lang="ts" setup>
+import { object } from 'vue-types';
 
 let props: any = defineProps({
   columns: {
@@ -28,20 +34,15 @@ let props: any = defineProps({
       return []
     }
   },
-  mydelete: {
-    type: Function,
+  buttonData: {
+    type: Array,
     default: function () {
-      return function () {
-      }
-    }
-  },
-  myedit: {
-    type: Function,
-    default: function () {
-      return function () { }
+      return []
     }
   }
 })
+// button数据
+console.log('button收到button', props.buttonData)
 
 // 表头数据
 console.log('table表收到的标题头', props.columns)

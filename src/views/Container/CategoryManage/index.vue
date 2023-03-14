@@ -1,11 +1,10 @@
 <template>
-  <Itable :columns="columns" :tableData="tableData.articleList" />
+  <Itable :columns="columns" :tableData="tableData.articleList" :buttonData="buttonData" />
 </template>
 <script lang="ts" setup>
 import Itable from '../../../components/Itable.vue'
 import { getAllMenuCategory } from '../../../api/index'
 import { reqDeleteCategorySort } from '../../../api/index'
-import { useRouter } from 'vue-router'
 import { reactive } from '@vue/reactivity';
 
 let tableData: any = reactive({ articleList: [] })
@@ -46,19 +45,36 @@ let columns = reactive([
       {
         title: "delete", callback: (params: any) => {
           reqDeleteCategorySort(params).then((res) => {
-            console.log("调用后的参数", res)
+            getAllSort();
           })
         }
       }
     ]
   },
 ])
-const router = useRouter()
+const buttonData = reactive([
+  {
+    title: "Add", callback: (params: any) => {
+      reqDeleteCategorySort(params).then((res) => {
+        console.log()
+      })
+    }
+  },
+  {
+    title: "SelectAll", callback: (params: any) => {
+      reqDeleteCategorySort(params).then((res) => {
+        console.log()
+      })
+    }
+  }
+])
 // 获取分类
-getAllMenuCategory().then((res) => {
-  tableData.articleList = res.data;
-  console.log('传出去的文章，新闻数组', tableData.articleList);
-  console.log('传出去的标题头', columns)
-});
-
+const getAllSort = () => {
+  getAllMenuCategory().then((res) => {
+    tableData.articleList = res.data;
+    console.log('传出去的文章，新闻数组', tableData.articleList);
+    console.log('传出去的标题头', columns)
+  });
+}
+getAllSort();
 </script>
