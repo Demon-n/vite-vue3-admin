@@ -37,11 +37,10 @@ export const reqGetUserInfo = () =>
  * 查看文章分类接口
  *
  */
-export const reqSelectSort = (id: any) =>
+export const reqSelectSort = () =>
   requests({
     url: "/article/getAllCategory",
     method: "get",
-    params: id,
   });
 /**
  *
@@ -71,7 +70,7 @@ export const reqDeleteSort = (data: any) =>
  *
  */
 export const getAllMenuCategory = () =>
-  requests({ url: "/article/getAllRouterCategory", method: "get" });
+  requests({ url: "/article/getAllCategory", method: "get" });
 
 /**
 *
@@ -79,4 +78,4 @@ export const getAllMenuCategory = () =>
 *
 */
 export const reqDeleteCategorySort = (data: any) =>
-  requests({ url: "/category/deleteCategory", method: "get", data });
+  requests({ url: "/article/deleteCategory", method: "get", params: data });

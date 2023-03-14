@@ -23,7 +23,7 @@
   </div>
 </template>
 <script  lang="ts" setup>
-import { getAllMenuCategory } from '../../api/index'
+import { reqSelectSort } from '../../api/index'
 import { reactive, } from 'vue';
 import type { MenuTheme } from 'ant-design-vue';
 import {
@@ -32,7 +32,7 @@ import {
 
 const menuList = reactive([
   {
-    title: "分类",
+    title: "分类管理",
     path: "",
     key: "sort",
     children: []
@@ -54,17 +54,24 @@ const menuList = reactive([
       }
     ],
   },
+  {
+    title: "文章中心",
+    path: "",
+    key: "news",
+    children: []
+  }
 ]);
 //加载菜单
-getAllMenuCategory().then((res) => {
-  const newData = res.data.map((item: { title: any; id: string; }, index: string) => {
+reqSelectSort().then((res) => {
+  console.log('res',res)
+  const newData = res.data.map((item: { name: any; id: string; }, index: string) => {
     return {
-      title: item.title,
+      title: item.name,
       path: '/SelectSort/' + item.id,
       key: 'SelectSort' + index
     }
-  })
-  menuList[0].children.unshift(...newData);
+  })  
+  menuList[2].children.unshift(...newData);
 }
 )
 
@@ -74,13 +81,13 @@ const state = reactive({
   openKeys: ['sub1'],
 });
 
-const changeTheme = (checked: boolean) => {
-  state.theme = checked ? 'dark' : 'light';
-};
+// const changeTheme = (checked: boolean) => {
+//   state.theme = checked ? 'dark' : 'light';
+// };
 
-function onUpdated(arg0: () => void) {
-  throw new Error('Function not implemented.');
-}
+// function onUpdated(arg0: () => void) {
+//   throw new Error('Function not implemented.');
+// }
 </script>
 <style>
 .ant-layout-sider .ant-layout-sider-children .ant-menu {

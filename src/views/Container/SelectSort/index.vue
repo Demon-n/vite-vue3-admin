@@ -1,5 +1,5 @@
 <template>
-  <Itable :columns="tableColumns" :tableData="tableData.articleList" :mydelete="mydelete" :myedit="myedit" />
+  <Itable :columns="tableColumns" :tableData="tableData.articleList" />
 </template>
 <script lang="ts" setup>
 import { reactive } from '@vue/reactivity';

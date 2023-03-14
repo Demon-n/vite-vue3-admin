@@ -3,7 +3,7 @@
     <template #bodyCell="{ column, record }">
       <template v-if="column.dataIndex === 'operation'">
         <a-row>
-          <template v-for="item in record.btn">
+          <template v-for="item in column.btn">
             <a-col span="12">
               <a-button type="primary" @click="item.callback({ id: record.id })">{{ item.title }}</a-button>
             </a-col>
@@ -12,7 +12,7 @@
       </template>
     </template>
   </a-table>
-</template>
+</template> 
 <script lang="ts" setup>
 
 let props: any = defineProps({
